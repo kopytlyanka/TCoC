@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://stages/scripts/BorderRoom.gd" type="Script" id=2]
+
+[node name="Room" type="ReferenceRect"]
+margin_top = -8.0
+margin_right = 8.0
+script = ExtResource( 2 )
+
+[node name="CameraTrigger" type="Area2D" parent="."]
+position = Vector2( 0, 8 )
+
+[node name="AreaShape" type="CollisionPolygon2D" parent="CameraTrigger"]
+position = Vector2( 24, 8 )
+polygon = PoolVector2Array( -24, -8, -16, -8, -16, -16, -24, -16 )

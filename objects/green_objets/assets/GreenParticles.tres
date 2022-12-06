@@ -1,0 +1,18 @@
+[gd_resource type="ParticlesMaterial" format=2]
+
+[resource]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+gravity = Vector3( 0, 5, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 5.0
+linear_accel_random = 1.0
+radial_accel = 10.0
+radial_accel_random = 1.0
+tangential_accel = 2.0
+tangential_accel_random = 1.0
+angle = 10.0
+angle_random = 1.0
+color = Color( 0, 1, 0.356863, 1 )

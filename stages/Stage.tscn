@@ -1,0 +1,121 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://stages/BorderRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://stages/Layer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://stages/scripts/stageCreating.gd" type="Script" id=3]
+[ext_resource path="res://objects/Door/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/DeadTrigger/DeadTrigger.tscn" type="PackedScene" id=6]
+
+[node name="Stage" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Layer1" parent="." instance=ExtResource( 2 )]
+
+[node name="TileMap" parent="Layer1" index="0"]
+tile_data = PoolIntArray( -262149, 0, 1, -262148, 0, 196610, -262147, 0, 196610, -262146, 0, 196610, -262145, 0, 196610, -327680, 0, 196610, -327679, 0, 196610, -327678, 0, 196610, -327677, 0, 196610, -327676, 0, 196610, -327675, 0, 2, -327674, 0, 196610, -327673, 0, 196610, -327672, 0, 196610, -327671, 0, 196610, -327670, 0, 196610, -327669, 0, 196610, -327668, 0, 196610, -327667, 0, 196610, -327666, 0, 196610, -327665, 0, 3, -196613, 0, 65536, -262139, 0, 65536, -262129, 0, 65536, -131077, 0, 65536, -196603, 0, 65536, -196593, 0, 65536, -65541, 0, 65536, -131067, 0, 131072, -131057, 0, 65536, -5, 0, 65536, -4, 1, 0, -65526, 1, 0, -65525, 1, 0, -65524, 1, 0, -65521, 0, 65536, 65531, 0, 131073, 65532, 0, 196610, 65533, 0, 196610, 65534, 0, 196610, 65535, 0, 196610, 0, 0, 196610, 1, 0, 196610, 2, 0, 196610, 3, 0, 196610, 4, 0, 196610, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 196610, 10, 0, 196610, 11, 0, 196610, 12, 0, 196610, 13, 0, 196610, 14, 0, 196610, 15, 0, 131075 )
+
+[node name="Room1" parent="Layer1/RoomBorders" index="0" instance=ExtResource( 1 )]
+margin_left = -216.0
+margin_top = -104.0
+margin_right = 88.0
+margin_bottom = 40.0
+
+[node name="AreaShape" parent="Layer1/RoomBorders/Room1/CameraTrigger" index="0"]
+position = Vector2( 176, 40 )
+polygon = PoolVector2Array( -24, 56, 120, 56, 120, -72, -24, -72 )
+
+[node name="Room2" parent="Layer1/RoomBorders" index="1" instance=ExtResource( 1 )]
+margin_left = 88.0
+margin_top = -104.0
+margin_right = 392.0
+margin_bottom = 40.0
+
+[node name="AreaShape" parent="Layer1/RoomBorders/Room2/CameraTrigger" index="0"]
+polygon = PoolVector2Array( -16, 88, 128, 88, 128, -40, -16, -40 )
+
+[node name="Door" parent="Layer1" instance=ExtResource( 4 )]
+position = Vector2( 216, 0 )
+layer_id = 2
+
+[node name="deadTrigger" parent="Layer1" instance=ExtResource( 6 )]
+position = Vector2( -264, 64 )
+scale = Vector2( 700, 1 )
+
+[node name="Layer2" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="TileMap" parent="Layer2" index="0"]
+tile_data = PoolIntArray( -917500, 0, 1, -917499, 0, 196610, -917498, 0, 196610, -917497, 0, 196610, -917496, 0, 196610, -917495, 0, 196610, -917494, 0, 196610, -917493, 0, 196610, -917492, 0, 196610, -917491, 0, 196610, -917490, 0, 196610, -917489, 0, 196610, -917488, 0, 3, -851964, 0, 65536, -851952, 0, 65536, -786428, 0, 65536, -786418, 1, 0, -786417, 1, 0, -786416, 0, 65536, -720892, 0, 65536, -720886, 0, 196609, -720885, 0, 196610, -720884, 0, 196610, -720883, 0, 196610, -720882, 0, 196610, -720881, 0, 196610, -720880, 0, 65539, -655356, 0, 65537, -655355, 0, 196611, -655344, 0, 65536, -589820, 0, 65536, -589808, 0, 65536, -524284, 0, 65536, -524281, 0, 0, -524272, 0, 65536, -458748, 0, 65536, -458747, 1, 0, -458746, 1, 0, -458745, 0, 65536, -458744, 1, 0, -458743, 1, 0, -458742, 0, 0, -458736, 0, 65536, -393212, 0, 65537, -393211, 0, 196610, -393210, 0, 196610, -393209, 0, 131074, -393208, 0, 196610, -393207, 0, 196610, -393206, 0, 131075, -393201, 0, 196609, -393200, 0, 65539, -327676, 0, 65536, -327667, 1, 0, -327666, 1, 0, -327665, 1, 0, -327664, 0, 65536, -262140, 0, 65536, -262132, 0, 196609, -262131, 0, 196610, -262130, 0, 196610, -262129, 0, 196610, -262128, 0, 65539, -196604, 0, 65536, -196592, 0, 65536, -131068, 0, 65536, -131066, 0, 196609, -131065, 0, 196610, -131064, 0, 196611, -131056, 0, 65536, -65532, 0, 65536, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, -65527, 1, 0, -65526, 1, 0, -65520, 0, 65536, 4, 0, 131073, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 196610, 10, 0, 196610, 11, 0, 196610, 12, 0, 196610, 13, 0, 196610, 14, 0, 196610, 15, 0, 196610, 16, 0, 131075 )
+
+[node name="Room1" parent="Layer2/RoomBorders" index="0" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_top = -240.0
+margin_right = 304.0
+margin_bottom = 40.0
+
+[node name="AreaShape" parent="Layer2/RoomBorders/Room1/CameraTrigger" index="0"]
+polygon = PoolVector2Array( 24, 224, 200, 224, 200, 8, 24, 8 )
+
+[node name="Door1" parent="Layer2" instance=ExtResource( 4 )]
+position = Vector2( 216, 0 )
+layer_id = 1
+
+[node name="Door2" parent="Layer2" instance=ExtResource( 4 )]
+position = Vector2( 200, -176 )
+layer_id = 3
+
+[node name="Layer3" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="TileMap" parent="Layer3" index="0"]
+position = Vector2( -1, 0 )
+tile_data = PoolIntArray( -1310741, 1, 0, -1310740, 1, 0, -1245205, 0, 1, -1245204, 0, 196611, -1245188, 0, 196609, -1245187, 0, 196610, -1245186, 0, 196611, -1179669, 0, 65536, -1179664, 0, 196609, -1179663, 0, 3, -1179661, 0, 1, -1179660, 0, 196611, -1179658, 0, 0, -1179656, 1, 0, -1179655, 0, 0, -1179653, 0, 0, -1179650, 1, 0, -1179649, 0, 0, -1114133, 0, 65537, -1114132, 0, 196611, -1114127, 0, 65536, -1114126, 1, 0, -1114125, 0, 65536, -1114122, 0, 131072, -1114121, 1, 0, -1114120, 0, 1, -1114119, 0, 131075, -1114117, 0, 65536, -1114115, 1, 0, -1114114, 0, 196609, -1114113, 0, 65539, -1048597, 0, 65536, -1048591, 0, 65537, -1048590, 0, 196610, -1048589, 0, 65539, -1048585, 0, 1, -1048584, 0, 131075, -1048581, 0, 65536, -1048580, 1, 0, -1048579, 0, 196608, -1048577, 0, 65536, -983061, 0, 65537, -983060, 0, 196611, -983055, 0, 65536, -983053, 0, 65536, -983050, 0, 1, -983049, 0, 131075, -983045, 0, 65537, -983044, 0, 196611, -983041, 0, 65536, -1048566, 1, 0, -1048565, 1, 0, -917525, 0, 65536, -917519, 0, 65536, -917517, 0, 65536, -917514, 0, 65536, -917509, 0, 65536, -917505, 0, 65536, -983038, 0, 196609, -983037, 0, 3, -983036, 1, 0, -983035, 1, 0, -983034, 0, 1, -983033, 0, 196610, -983032, 0, 196610, -983031, 0, 196610, -983030, 0, 196610, -983029, 0, 196610, -983028, 0, 196610, -983027, 0, 196610, -983026, 0, 196610, -983025, 0, 196610, -983024, 0, 3, -851989, 0, 131073, -851988, 0, 196611, -851984, 0, 196609, -851983, 0, 131075, -851981, 0, 131073, -851980, 0, 196611, -851978, 0, 131072, -851973, 0, 131072, -851969, 0, 131072, -917501, 0, 131073, -917500, 0, 196610, -917499, 0, 196610, -917498, 0, 131075, -917488, 0, 65536, -851952, 0, 65536, -720917, 1, 0, -720916, 1, 0, -720915, 1, 0, -720910, 1, 0, -720906, 1, 0, -720905, 1, 0, -720900, 1, 0, -720899, 1, 0, -720898, 1, 0, -786416, 0, 65536, -655381, 0, 196609, -655380, 0, 196610, -655379, 0, 196610, -655378, 0, 196610, -655377, 0, 196610, -655376, 0, 196610, -655375, 0, 196610, -655374, 0, 196610, -655373, 0, 196610, -655372, 0, 196610, -655371, 0, 196610, -655370, 0, 196610, -655369, 0, 196610, -655368, 0, 196610, -655367, 0, 196610, -655366, 0, 196610, -655365, 0, 196610, -655364, 0, 196610, -655363, 0, 196610, -655362, 0, 196610, -655361, 0, 196610, -720896, 0, 196610, -720895, 0, 196610, -720894, 0, 196610, -720893, 0, 196610, -720892, 0, 196610, -720891, 0, 196610, -720890, 0, 196610, -720889, 0, 196610, -720888, 0, 196610, -720887, 0, 196610, -720886, 0, 196610, -720885, 0, 196610, -720884, 0, 196610, -720883, 0, 196610, -720882, 0, 196610, -720881, 0, 196610, -720880, 0, 131075 )
+
+[node name="RoomBorders" parent="Layer3" index="1"]
+visible = false
+
+[node name="Room1" parent="Layer3/RoomBorders" index="0" instance=ExtResource( 1 )]
+margin_left = 40.0
+margin_top = -272.0
+margin_right = 344.0
+margin_bottom = -136.0
+
+[node name="AreaShape" parent="Layer3/RoomBorders/Room1/CameraTrigger" index="0"]
+position = Vector2( 24, 48 )
+polygon = PoolVector2Array( -16, 40, 192, 40, 192, -16, 48, -16, 48, -8, -16, -8 )
+
+[node name="Room2" parent="Layer3/RoomBorders" index="1" instance=ExtResource( 1 )]
+margin_left = -448.0
+margin_top = -376.0
+margin_right = 344.0
+margin_bottom = -136.0
+
+[node name="AreaShape" parent="Layer3/RoomBorders/Room2/CameraTrigger" index="0"]
+position = Vector2( 495, 200 )
+polygon = PoolVector2Array( -384, -8, -16, -8, -15, -152, -367, -152, -367, -48, -384, -48 )
+
+[node name="Door1" parent="Layer3" instance=ExtResource( 4 )]
+position = Vector2( 200, -176 )
+layer_id = 2
+
+[node name="Door2" parent="Layer3" instance=ExtResource( 4 )]
+position = Vector2( 200, -240 )
+layer_id = 1
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 0, -16 )
+
+[editable path="Layer1"]
+[editable path="Layer1/RoomBorders/Room1"]
+[editable path="Layer1/RoomBorders/Room2"]
+[editable path="Layer2"]
+[editable path="Layer2/RoomBorders/Room1"]
+[editable path="Layer3"]
+[editable path="Layer3/RoomBorders/Room1"]
+[editable path="Layer3/RoomBorders/Room2"]
