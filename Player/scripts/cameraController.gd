@@ -2,8 +2,8 @@ extends Camera2D
 
 const TRANSITION = Tween.TRANS_EXPO
 const EASY = Tween.EASE_IN_OUT
-const BASIC_DURATION = 0.4
-var duration: float  = 0
+const BASIC_DURATION: float = 0.4
+var duration = 0
 
 func change_limits(body: Node, new_limits: Dictionary):
 	if body.name != 'Player': return
@@ -13,4 +13,4 @@ func change_limits(body: Node, new_limits: Dictionary):
 			TRANSITION, EASY
 		)
 	$Tween.start()
-	duration = BASIC_DURATION
+	if duration == 0: duration = BASIC_DURATION

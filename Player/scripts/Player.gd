@@ -5,8 +5,8 @@ const MAX_HORIZONTAL_SPEED = 70
 const FRICTION = 0.5
 
 const GRAVITY = Vector2.DOWN
-const GRAVITY_POWER = 650
-const MAX_FALING_SPEED = 150
+const GRAVITY_POWER = 680
+const MAX_FALING_SPEED = 190
 const AIR_RESISTANCE = 0.1
 
 const JUMP_POWER = 100
@@ -16,9 +16,6 @@ var time_in_jump = 0
 var count_of_jumps = COUNT_OF_JUMPS
 
 var velocity = Vector2.ZERO
-
-func spawn():
-	visible = true
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):

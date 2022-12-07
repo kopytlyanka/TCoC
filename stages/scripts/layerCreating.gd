@@ -1,10 +1,10 @@
 extends Node2D
 
-enum {SPIKES = 1}
+onready var layer_id = int(name)
 var convert_dictionary = {
 	SPIKES : load('res://objects/Spikes/Spikes.tscn')
 }
-onready var layer_id = int(name.substr(5))
+enum {SPIKES = 1}
 
 func _ready():
 	convert_to_objects_tiles(SPIKES)
