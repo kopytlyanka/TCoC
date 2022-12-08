@@ -4,11 +4,11 @@ enum {OFF, ON}
 
 #[SAVE]
 var save_file: File # onready var save_file = preload(PATH: str)
-var spawn_point = Vector2(3, 1) # var spawn_point: Vector2
+var spawn_point = Vector2(1, 1) # var spawn_point: Vector2
 var	visible_layer_id: int
 
 func load():
-	get_tree().change_scene("res://stages/Stage.tscn")
+	get_tree().change_scene("res://Stage/Stage.tscn")
 	
 func load_data():
 # 	spawn_point = str2var(save_file['spawn_point'])

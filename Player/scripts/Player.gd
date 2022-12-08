@@ -17,12 +17,15 @@ var count_of_jumps = COUNT_OF_JUMPS
 
 var velocity = Vector2.ZERO
 	
+func _ready():
+	$RigidArea.connect("body_entered", self, 'die')
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
-		for object in $Area2D.get_overlapping_areas():
+		for object in $InteractArea.get_overlapping_areas():
 			if object.has_method("interact"):
 				object.interact()
-
+	
 func _physics_process(delta):
 	var x_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.x += x_direction * ACCELERATION * delta
