@@ -9,9 +9,9 @@ func _ready():
 	update_texture()
 
 func interact():
-	send_signal()
 	active = not active
 	update_texture()
+	send_signal()
 
 func update_texture():
 	if active: $Sprite.texture = lever_on

@@ -1,7 +1,7 @@
 extends ReferenceRect
 
 func _ready():
-	var offsets = get_parent().get_parent().position
+	var offsets = Game.get_parent_layer_of(self).position + Game.get_stage().position
 	$CameraTrigger.connect(
 		"body_entered", Game.get_camera(), 'change_limits', 
 		[{

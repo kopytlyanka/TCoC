@@ -1,61 +1,79 @@
 extends Node2D
 class_name ActionObject
 
-export var receiver = false
-export var sender = false
-export var green = false
+export var receiver: bool = false
+export var sender: bool = false
+export var green: bool = false
+var green_visible: bool = false
+
+export var senders_list: Array
+export var receivers_list: Array
+
+func _enter_tree():
+	if green: green_visible = true
 
 func _ready():
 	if receiver: become_receiver()
 	if sender: become_sender()
 	if green: become_green()
 
-func check_type(type: String):
+func check_type(type: String) -> void:
 	assert(self.get(type), "%s is not %s!\n(path: %s)" % [self, type, self.get_path()])
 
 #[RESIVER]
-func is_receiver():
+func is_receiver() -> bool:
 	return receiver
 
-func become_receiver():
+func become_receiver() -> void:
 	if not is_receiver(): receiver = true
 	
-func activate():
+func receive_signal(_sender: String) -> void:
 	check_type('receiver')
+	activate()
+	
+func activate() -> void:
+	pass
 #[RESIVER]
 
 #[SENDER]
-signal condition_fulliled
+signal condition_fulfilled(name)
 
-func is_sender():
+func is_sender() -> bool:
 	return sender
 
-func become_sender():
+func become_sender() -> void:
 	if not is_sender(): sender = true
-	for i in get_child_count():
-		var child = get_child(i)
-		if child.has_method('activate'):
-			connect('condition_fulliled', get_child(i), 'activate')
-		
-func send_signal():
+	for obj in receivers_list:
+		var receicver_obj = Game.get_layer(obj[0]).get_node(obj[1])
+		connect('condition_fulfilled', receicver_obj, 'receive_signal')
+		if green: receicver_obj.become_green()
+
+func send_signal() -> void:
 	check_type('sender')
-	emit_signal("condition_fulliled")
+	emit_signal("condition_fulfilled", name)	
 #[SENDER]
 
 #[GREEN]
 var particles = preload("res://objects/action_objects/assets/GreenParticles.tscn")
 
-func is_green():
+func is_green() -> bool:
 	return green
+	
+func is_green_visible() -> bool:
+	return green_visible
 
-func become_green():
+func become_green() -> void:
 	if not is_green(): green = true
-	add_child(particles.instance())
 	add_to_group('green')
+	if green_visible: add_child(particles.instance())
 
-func save():
+func become_green_visible() -> void:
+	if not is_green_visible(): green_visible = true
+	if green_visible: add_child(particles.instance())
+
+func save() -> void:
 	check_type('green')
 	
-func load():
+func load() -> void:
 	check_type('green')
 #[GREEN]

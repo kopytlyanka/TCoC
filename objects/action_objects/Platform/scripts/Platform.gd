@@ -5,7 +5,7 @@ var platform_tile = preload('res://objects/action_objects/Platform/PlatformTile/
 export var width: int = 1
 
 func _ready():	
-	$Area2D.connect("body_entered", self, 'debug')
+	$Area2D.connect("body_entered", self, 'destroy')
 	$Area2D.scale.x = width
 	$StaticBody2D.scale.x = width
 	for i in range(width):
@@ -13,7 +13,8 @@ func _ready():
 		tile.position.x += 8*i
 		add_child(tile)
 	
-func debug(body: Node):
+func destroy(body: Node):
 	if body.name != 'Player': return
+	
 	Game.change_property('collision_layer', self, 0)
 	Game.change_property('visible', self, false)

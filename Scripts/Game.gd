@@ -39,11 +39,24 @@ func get_camera() -> Node:
 
 func get_layer(layer_id: int) -> Node:
 	return get_stage().get_node('Layer%d' % layer_id)
+	
+func get_parent_layer_of(node: Node) -> Node:
+	var parent = node.get_parent()
+	if parent.name == 'Stage': return null
+	elif parent.name.substr(0, 5) == 'Layer':
+		return parent
+	return get_parent_layer_of(parent)
 #[GETTERS]
 
 #[USEFUL]
 func pow2(power: int) -> int:
 	return 1 << power
+	
+func change_property(property: String, node: Node, value):
+	if node.get(property) != null:
+		node.set(property, value)
+	for i in node.get_child_count():
+		change_property(property, node.get_child(i), value)
 #[USEFUL]
 
 #[DISPLAY]
@@ -61,10 +74,4 @@ func set_layer_collision(layer_id: int):
 	
 func set_player_mask(layer_id: int):
 	change_property('collision_mask', get_player(), pow2(layer_id - 1))
-	
-func change_property(property: String, node: Node, value):
-	if node.get(property) != null:
-		node.set(property, value)
-	for i in node.get_child_count():
-		change_property(property, node.get_child(i), value)
 #[DISPLAY]
