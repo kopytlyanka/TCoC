@@ -29,18 +29,18 @@ func save():
 
 #[GETTERS]
 func get_stage() -> Node:
-	return get_viewport().get_child(1)
+	return get_viewport().get_node_or_null('Stage')
 	
 func get_player() -> Node:
-	return get_stage().get_node('Player')
+	return get_stage().get_node_or_null('Player')
 	
 func get_camera() -> Node:
 	return get_player().get_node('Camera')
 
 func get_layer(layer_id: int) -> Node:
-	return get_stage().get_node('Layer%d' % layer_id)
+	return get_stage().get_node_or_null('Layer%d' % layer_id)
 	
-func get_parent_layer_of(node: Node) -> Node:
+func get_parent_layer_of(node: Node) -> Node2D:
 	var parent = node.get_parent()
 	if parent.name == 'Stage': return null
 	elif parent.name.substr(0, 5) == 'Layer':
@@ -52,7 +52,7 @@ func get_parent_layer_of(node: Node) -> Node:
 func pow2(power: int) -> int:
 	return 1 << power
 	
-func change_property(property: String, node: Node, value):
+func change_property(property: String, node: Node, value) -> void:
 	if node.get(property) != null:
 		node.set(property, value)
 	for i in node.get_child_count():
@@ -60,18 +60,18 @@ func change_property(property: String, node: Node, value):
 #[USEFUL]
 
 #[DISPLAY]
-func change_display_to_layer(layer_id: int):
+func change_display_to_layer(layer_id: int) -> void:
 	if visible_layer_id: layer_visibility_turned(OFF, visible_layer_id)
 	visible_layer_id = layer_id
 	layer_visibility_turned(ON, visible_layer_id)
 	set_player_mask(layer_id)
 	
-func layer_visibility_turned(state: bool, layer_id: int):
+func layer_visibility_turned(state: bool, layer_id: int) -> void:
 	change_property('visible', get_layer(layer_id), state)
 
-func set_layer_collision(layer_id: int):
+func set_layer_collision(layer_id: int) -> void:
 	change_property('collision_layer', get_layer(layer_id), pow2(layer_id - 1))
 	
-func set_player_mask(layer_id: int):
+func set_player_mask(layer_id: int) -> void:
 	change_property('collision_mask', get_player(), pow2(layer_id - 1))
 #[DISPLAY]

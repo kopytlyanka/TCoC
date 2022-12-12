@@ -10,7 +10,7 @@ export var senders_list: Array
 export var receivers_list: Array
 
 func _enter_tree():
-	if green: green_visible = true
+	if is_green(): green_visible = true
 
 func _ready():
 	if receiver: become_receiver()
@@ -46,7 +46,7 @@ func become_sender() -> void:
 	for obj in receivers_list:
 		var receicver_obj = Game.get_layer(obj[0]).get_node(obj[1])
 		connect('condition_fulfilled', receicver_obj, 'receive_signal')
-		if green: receicver_obj.become_green()
+		if is_green(): receicver_obj.hidden_become_green()
 
 func send_signal() -> void:
 	check_type('sender')
@@ -58,18 +58,21 @@ var particles = preload("res://objects/action_objects/assets/GreenParticles.tscn
 
 func is_green() -> bool:
 	return green
-	
-func is_green_visible() -> bool:
+
+func is_green_visually() -> bool:
 	return green_visible
 
 func become_green() -> void:
+	hidden_become_green()
+	visually_become_green()
+
+func hidden_become_green() -> void:
 	if not is_green(): green = true
 	add_to_group('green')
-	if green_visible: add_child(particles.instance())
-
-func become_green_visible() -> void:
-	if not is_green_visible(): green_visible = true
-	if green_visible: add_child(particles.instance())
+	
+func visually_become_green():
+	if is_green_visually():
+		add_child(particles.instance())
 
 func save() -> void:
 	check_type('green')

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Stage/scripts/stageCreating.gd" type="Script" id=1]
 [ext_resource path="res://Stage/BorderRoom.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://objects/inaction_objects/DeadTrigger/DeadTrigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/inaction_objects/SpawnPoint/SpawnPoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/action_objects/Platform/Platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Stage/Layer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/action_objects/Lever/Lever.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/action_objects/MoveBlock/MoveBlock.tscn" type="PackedScene" id=10]
@@ -126,10 +125,6 @@ polygon = PoolVector2Array( -24, -8, -8, -8, -8, -64, -264, -64, -264, -8, -136,
 [node name="Door" parent="Layer2" instance=ExtResource( 3 )]
 position = Vector2( 216, -176 )
 layer_id = 1
-
-[node name="Player" parent="." instance=ExtResource( 7 )]
-visible = false
-position = Vector2( 0, -16 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
