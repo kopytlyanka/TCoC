@@ -5,3 +5,4 @@ func _enter_tree():
 
 func _ready():
 	Game.has_been_built = true
+	Game.save_data = {}

@@ -5,6 +5,9 @@ var lever_on = preload('res://objects/action_objects/Lever/assets/lever_on.png')
 var lever_off = preload('res://objects/action_objects/Lever/assets/lever_off.png')
 export var active = false
 
+func _enter_tree():
+	save_list = ['active']
+
 func _ready():
 	update_texture()
 
@@ -16,11 +19,3 @@ func interact():
 func update_texture():
 	if active: $Sprite.texture = lever_on
 	else: $Sprite.texture = lever_off
- 
-func _load():
-	._load()
-	active = data['active']
-
-func _save():
-	._save()
-	Game.save_data['layer%d' % layer_id][name]['active'] = active

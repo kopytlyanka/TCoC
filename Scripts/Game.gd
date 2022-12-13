@@ -28,8 +28,17 @@ func save():
 		save_file_name = 'save1'
 	save_file.open('user://save/%s.json' % save_file_name, File.WRITE)
 	for object in get_tree().get_nodes_in_group('green'):
-		object._save()
+		var object_data: Array = object._save()
+		var object_layer: String = object_data[0]
+		var object_name: String = object_data[1]
+		var object_properties: Dictionary = object_data[2]
+		if not object_layer in save_data.keys():
+			save_data[object_layer] = {}
+		save_data[object_layer][object_name] = object_properties
+	save_data['green_group_expansion'] = green_group_expansion
+	save_data['spawn_point'] = var2str(spawn_point)
 	save_file.store_string(to_json(save_data))
+	save_file.close()
 #[SAVE/LOAD]
 
 #[GETTERS]

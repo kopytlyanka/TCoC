@@ -60,7 +60,7 @@ func send_signal() -> void:
 
 #[GREEN]
 var particles = preload("res://objects/action_objects/assets/GreenParticles.tscn")
-var data: Dictionary
+var save_list: Array
 
 func is_green() -> bool:
 	return green
@@ -88,8 +88,15 @@ func visually_become_green():
 	
 func _load() -> void:
 	check_type('green')
-	data = Game.get_layer(layer_id).layer_data[name]
+	var data = Game.save_data['layer%d' % layer_id][name]
+	for property in save_list:
+		set(property, data[property])
 	
-func _save() -> void:
+func _save() -> Array:
 	check_type('green')
+	var data: Dictionary
+	prints(name, save_list)
+	for property in save_list:
+		data[property] = get(property)
+	return ['layer%d' % layer_id, name, data]
 #[GREEN]

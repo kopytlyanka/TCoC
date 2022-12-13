@@ -8,8 +8,3 @@ func _ready():
 	Game.add_player()
 	Game.add_stage()
 	Game.spawn_player()
-	var a
-	var b
-	[a, b]= [1, 2]
-	print(a)
-	print(b)

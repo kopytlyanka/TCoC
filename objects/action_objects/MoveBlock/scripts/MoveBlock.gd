@@ -9,6 +9,9 @@ export var speed: int
 
 var iterator: int = 0
 
+func _enter_tree():
+	save_list = ['iterator']
+
 func _ready():
 	global_position = positions[move_pattern[iterator]]
 	var tileMap = get_node("TileMap")
@@ -28,11 +31,3 @@ func activate():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	$Tween.start()
-
-func _load():
-	._load()
-	iterator = data['iterator']
-
-func _save():
-	._save()
-	Game.save_data['layer%d' % layer_id][name]['iterator'] = iterator

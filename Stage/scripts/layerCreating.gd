@@ -1,8 +1,6 @@
 extends Node2D
 
 var layer_id: int
-var layer_data: Dictionary
-
 var convert_dictionary = {
 	SPIKES : load('res://objects/inaction_objects/Spikes/Spikes.tscn')
 }
@@ -10,7 +8,6 @@ enum {SPIKES = 1}
 
 func _enter_tree():
 	layer_id = int(name)	
-	layer_data = Game.get_data_about_layer('layer%d' % layer_id)
 
 func _ready():
 	convert_to_objects_tiles(SPIKES)
