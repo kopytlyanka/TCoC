@@ -77,6 +77,10 @@ func hidden_become_green() -> void:
 	if not is_green(): green = true
 	add_to_group('green')
 	if is_sender():
+		if Game.has_been_built:
+			if not layer_id in Game.green_group_expansion.keys():
+				Game.green_group_expansion[layer_id] = []
+			Game.green_group_expansion[layer_id].append(name)
 		for receiver_data in receivers_list:
 			var receicver = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
 			receicver.hidden_become_green()
@@ -94,8 +98,7 @@ func _load() -> void:
 	
 func _save() -> Array:
 	check_type('green')
-	var data: Dictionary
-	prints(name, save_list)
+	var data: Dictionary = {}
 	for property in save_list:
 		data[property] = get(property)
 	return ['layer%d' % layer_id, name, data]
