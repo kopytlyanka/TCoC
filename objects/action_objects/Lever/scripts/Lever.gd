@@ -17,3 +17,10 @@ func update_texture():
 	if active: $Sprite.texture = lever_on
 	else: $Sprite.texture = lever_off
  
+func _load():
+	._load()
+	active = data['active']
+
+func _save():
+	._save()
+	Game.save_data['layer%d' % layer_id][name]['active'] = active

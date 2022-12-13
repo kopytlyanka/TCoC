@@ -1,0 +1,15 @@
+extends Node2D
+
+func _enter_tree():
+	Game.load_data()
+
+func _ready():
+	Game.activate_UI()
+	Game.add_player()
+	Game.add_stage()
+	Game.spawn_player()
+	var a
+	var b
+	[a, b]= [1, 2]
+	print(a)
+	print(b)

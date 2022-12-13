@@ -47,7 +47,7 @@ position = Vector2( 8, 40 )
 [node name="AreaShape" parent="Layer1/RoomBorders/Room1/CameraTrigger" index="0"]
 position = Vector2( 96, 128 )
 scale = Vector2( 1.03977, 1 )
-polygon = PoolVector2Array( -24, -8, -16, -8, 96, -8, 152, -144, 120, -144, -24, -16 )
+polygon = PoolVector2Array( -38.47, 8, 307.76, 8, 307.76, -144, 120, -144, -38.47, -144 )
 
 [node name="Room2" parent="Layer1/RoomBorders" index="1" instance=ExtResource( 2 )]
 margin_left = 64.0
@@ -69,8 +69,8 @@ scale = Vector2( 26.25, 10.625 )
 polygon = PoolVector2Array( 22.4381, -1.3647, 16.0381, -1.3647, 16.0381, -5.12941, 22.4381, -5.12941 )
 
 [node name="Platform1" parent="Layer1" instance=ExtResource( 6 )]
-position = Vector2( 88, -56 )
-width = 3
+position = Vector2( 80, -56 )
+width = 4
 
 [node name="Platform2" parent="Layer1" instance=ExtResource( 6 )]
 position = Vector2( 232, -72 )

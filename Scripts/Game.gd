@@ -1,38 +1,46 @@
 extends Node
 
-enum {OFF, ON}
-
-#[SAVE]
-var save_file: File # onready var save_file = preload(PATH: str)
-var spawn_point = Vector2(1, 1) # var spawn_point: Vector2
-var	visible_layer_id: int
+#[SAVE/LOAD]
+var save_file = File.new()
+var save_file_name: String
+var save_data: Dictionary
+var spawn_point: Vector2
+var visible_layer_id: int
+var green_group_expansion: Dictionary
 
 func load():
-	get_tree().change_scene("res://Stage/Stage.tscn")
+	if save_file.file_exists('user://save/save1.json'):
+		save_file_name = 'save1'
+	else:
+		save_file_name = 'base_save'
+	get_tree().change_scene('res://GamePlay.tscn')
 	
 func load_data():
-# 	spawn_point = str2var(save_file['spawn_point'])
-	visible_layer_id = spawn_point.x
-#	var _green_group = get_tree().get_nodes_in_group('green')
-#	for node in green_group:
-#		node.load_data(save_file[node.name may be])
-	change_display_to_layer(visible_layer_id)
-	get_layer(visible_layer_id).get_node('SpawnPoint%d' % spawn_point.y).spawn_player()
+	save_file.open('user://save/%s.json' % save_file_name, File.READ)
+	save_data = parse_json(save_file.get_as_text())
+	green_group_expansion = save_data['green_group_expansion']
+	spawn_point = str2var(save_data['spawn_point'])
+	visible_layer_id = int(spawn_point.x)
+	save_file.close()
 
 func save():
-	pass
-#	save_file['spawn_point'] = var2str(spawn_point)
-#	var _green_group = get_tree().get_nodes_in_group('green')
-#	for node in green_group:
-#		node.save_data(save_file[node.name may be])
-#[SAVE]
+	if save_file_name == 'base_save':
+		save_file_name = 'save1'
+	save_file.open('user://save/%s.json' % save_file_name, File.WRITE)
+	for object in get_tree().get_nodes_in_group('green'):
+		object._save()
+	save_file.store_string(to_json(save_data))
+#[SAVE/LOAD]
 
 #[GETTERS]
+func get_self() -> Node:
+	return get_viewport().get_node_or_null('GamePlay')
+
 func get_stage() -> Node:
-	return get_viewport().get_node_or_null('Stage')
+	return Game.get_self().get_node_or_null('Stage')
 	
 func get_player() -> Node:
-	return get_stage().get_node_or_null('Player')
+	return Game.get_self().get_node_or_null('Player')
 	
 func get_camera() -> Node:
 	return get_player().get_node('Camera')
@@ -60,6 +68,8 @@ func change_property(property: String, node: Node, value) -> void:
 #[USEFUL]
 
 #[DISPLAY]
+enum {OFF, ON}
+
 func change_display_to_layer(layer_id: int) -> void:
 	if visible_layer_id: layer_visibility_turned(OFF, visible_layer_id)
 	visible_layer_id = layer_id
@@ -75,3 +85,32 @@ func set_layer_collision(layer_id: int) -> void:
 func set_player_mask(layer_id: int) -> void:
 	change_property('collision_mask', get_player(), pow2(layer_id - 1))
 #[DISPLAY]
+
+#[CREATING]
+var has_been_built: bool
+
+func activate_UI() -> void:
+	#some shit
+	pass
+
+func add_player() -> void:
+	Game.get_self().add_child(preload("res://Player/Player.tscn").instance())
+
+func add_stage() -> void:
+	get_self().add_child(preload("res://Stage/Stage.tscn").instance())
+
+func spawn_player() -> void:
+	get_layer(visible_layer_id).get_node('SpawnPoint%d' % spawn_point.y).spawn_player()
+	change_display_to_layer(visible_layer_id)
+	
+func get_data_about_layer(layer_name: String) -> Dictionary:
+	if layer_name in save_data.keys():
+		return save_data[layer_name]
+	return {}
+
+func is_object_in_green_group_expansion(layer_id: int, name: String) -> bool:
+	if layer_id in Game.green_group_expansion.keys():
+		if name in Game.green_group_expansion[layer_id].keys():
+			return true
+	return false
+#[CREATING]

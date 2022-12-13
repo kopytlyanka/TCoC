@@ -12,4 +12,4 @@ func update_global_spawn_point(body: Node):
 func spawn_player() -> void:
 	var player = Game.get_player()
 	player.global_position = global_position + Vector2(0, -2)
-	player.visible = true
+	player.z_index = 0

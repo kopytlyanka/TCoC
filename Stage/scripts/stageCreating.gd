@@ -1,8 +1,7 @@
 extends Node2D
 
 func _enter_tree():
-	var player = preload("res://Player/Player.tscn").instance()
-	add_child(player)
+	Game.has_been_built = false
 
 func _ready():
-	Game.load_data()
+	Game.has_been_built = true

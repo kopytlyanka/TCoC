@@ -5,16 +5,22 @@ export var receiver: bool = false
 export var sender: bool = false
 export var green: bool = false
 var green_visible: bool = false
+var layer_id: int
 
 export var senders_list: Array
 export var receivers_list: Array
 
 func _enter_tree():
+	if not Engine.is_editor_hint():
+		layer_id = Game.get_parent_layer_of(self).layer_id
+		if not is_green():
+			green = Game.is_object_in_green_group_expansion(layer_id, name)
 	if is_green(): green_visible = true
 
 func _ready():
-	if receiver: become_receiver()
-	if sender: become_sender()
+	if not Engine.is_editor_hint():
+		if receiver: become_receiver()
+		if sender: become_sender()
 	if green: become_green()
 
 func check_type(type: String) -> void:
@@ -43,10 +49,9 @@ func is_sender() -> bool:
 
 func become_sender() -> void:
 	if not is_sender(): sender = true
-	for obj in receivers_list:
-		var receicver_obj = Game.get_layer(obj[0]).get_node(obj[1])
-		connect('condition_fulfilled', receicver_obj, 'receive_signal')
-		if is_green(): receicver_obj.hidden_become_green()
+	for receiver_data in receivers_list:
+		var receicver = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
+		connect('condition_fulfilled', receicver, 'receive_signal')
 
 func send_signal() -> void:
 	check_type('sender')
@@ -55,6 +60,7 @@ func send_signal() -> void:
 
 #[GREEN]
 var particles = preload("res://objects/action_objects/assets/GreenParticles.tscn")
+var data: Dictionary
 
 func is_green() -> bool:
 	return green
@@ -63,20 +69,27 @@ func is_green_visually() -> bool:
 	return green_visible
 
 func become_green() -> void:
-	hidden_become_green()
+	if not Engine.is_editor_hint():
+		hidden_become_green()
 	visually_become_green()
 
 func hidden_become_green() -> void:
 	if not is_green(): green = true
 	add_to_group('green')
+	if is_sender():
+		for receiver_data in receivers_list:
+			var receicver = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
+			receicver.hidden_become_green()
+	if not Game.has_been_built: _load()
 	
 func visually_become_green():
 	if is_green_visually():
 		add_child(particles.instance())
-
-func save() -> void:
-	check_type('green')
 	
-func load() -> void:
+func _load() -> void:
+	check_type('green')
+	data = Game.get_layer(layer_id).layer_data[name]
+	
+func _save() -> void:
 	check_type('green')
 #[GREEN]

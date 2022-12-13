@@ -7,7 +7,7 @@ export var positions: Array
 export var move_pattern: Array
 export var speed: int
 
-var iterator = 0
+var iterator: int = 0
 
 func _ready():
 	global_position = positions[move_pattern[iterator]]
@@ -28,3 +28,11 @@ func activate():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	$Tween.start()
+
+func _load():
+	._load()
+	iterator = data['iterator']
+
+func _save():
+	._save()
+	Game.save_data['layer%d' % layer_id][name]['iterator'] = iterator
