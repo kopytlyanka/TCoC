@@ -10,8 +10,10 @@ extents = Vector2( 4, 4 )
 extents = Vector2( 4, 4.5 )
 
 [node name="Platform" instance=ExtResource( 2 )]
+z_index = 6
 script = ExtResource( 1 )
 width = 1
+time = 0.2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 

@@ -6,7 +6,7 @@ var lever_off = preload('res://objects/action_objects/Lever/assets/lever_off.png
 export var active = false
 
 func _enter_tree():
-	save_list = ['active']
+	self.save_list = ['active']
 
 func _ready():
 	update_texture()
