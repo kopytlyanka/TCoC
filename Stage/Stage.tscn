@@ -103,7 +103,7 @@ width = 4
 height = 4
 positions = [ Vector2( 224, -32 ), Vector2( 272, -32 ) ]
 move_pattern = [ 0, 1 ]
-speed = 10
+speed = 15
 
 [node name="MoveBlock2" parent="Layer1" instance=ExtResource( 10 )]
 position = Vector2( 128, -64 )

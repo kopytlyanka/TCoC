@@ -4,10 +4,10 @@
 [ext_resource path="res://objects/action_objects/ActoinObject.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+extents = Vector2( 4, 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 4.5 )
+extents = Vector2( 4, 3 )
 
 [node name="Platform" instance=ExtResource( 2 )]
 z_index = 6
@@ -18,11 +18,11 @@ time = 0.2
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-position = Vector2( 4, -4 )
+position = Vector2( 4, -6 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 4, -4.5 )
+position = Vector2( 4, -6 )
 shape = SubResource( 2 )
