@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const ACCELERATION = 450
 const MAX_HORIZONTAL_SPEED = 70
-const FRICTION = 0.5
+const FRICTION = 0.55
 
 const GRAVITY = Vector2.DOWN
 const GRAVITY_POWER = 680
@@ -16,6 +16,7 @@ var time_in_jump = 0
 var count_of_jumps = COUNT_OF_JUMPS
 
 var velocity = Vector2.ZERO
+var motion_state = true
 	
 func _ready():
 	$RigidArea.connect("body_entered", self, 'die')
@@ -27,6 +28,7 @@ func _process(_delta):
 				object.interact()
 	
 func _physics_process(delta):
+	if can_not_move() : return
 	var x_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.x += x_direction * ACCELERATION * delta
 	
@@ -57,6 +59,9 @@ func _physics_process(delta):
 	velocity.y = clamp(velocity.y, -JUMP_POWER, MAX_FALING_SPEED)
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+func can_not_move() -> bool:
+	return not motion_state
+	
 func die(_body):
 	Game.save()
 	get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")

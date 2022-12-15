@@ -80,7 +80,7 @@ func change_property(property: String, node: Node, value) -> void:
 enum {OFF, ON}
 
 func change_display_to_layer(layer_id: int) -> void:
-	if visible_layer_id: layer_visibility_turned(OFF, visible_layer_id)
+	layer_visibility_turned(OFF, visible_layer_id)
 	visible_layer_id = layer_id
 	layer_visibility_turned(ON, visible_layer_id)
 	set_player_mask(layer_id)

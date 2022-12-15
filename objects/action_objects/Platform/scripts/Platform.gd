@@ -15,6 +15,4 @@ func _ready():
 	
 func destroy(body: Node):
 	if body.name != 'Player': return
-	
-	Game.change_property('collision_layer', self, 0)
-	Game.change_property('visible', self, false)
+	get_tree().queue_delete(self)
