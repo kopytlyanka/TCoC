@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/action_objects/MoveBlock/assets/MoveBlock.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/action_objects/ActoinObject.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/action_objects/MoveBlock/scripts/MoveBlock.gd" type="Script" id=3]
+
+[node name="MoveBlock" instance=ExtResource( 2 )]
+z_index = 1
+script = ExtResource( 3 )
+receiver = true
+width = 2
+height = 2
+positions = [  ]
+move_pattern = [  ]
+speed = 0
+
+[node name="TileMap" type="TileMap" parent="." index="0"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -131072, 0, 0, -131071, 0, 2, -65536, 0, 131072, -65535, 0, 131074 )
+
+[node name="Tween" type="Tween" parent="." index="1"]

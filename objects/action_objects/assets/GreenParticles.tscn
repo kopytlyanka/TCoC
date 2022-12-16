@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/action_objects/assets/GreenParticles.tres" type="Material" id=1]
+
+[node name="Particles2D" type="Particles2D"]
+z_index = -1
+amount = 14
+process_material = ExtResource( 1 )

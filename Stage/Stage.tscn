@@ -1,0 +1,156 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Stage/scripts/stageCreating.gd" type="Script" id=1]
+[ext_resource path="res://Stage/BorderRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/inaction_objects/Door/Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/inaction_objects/DeadTrigger/DeadTrigger.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/inaction_objects/SpawnPoint/SpawnPoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/action_objects/Platform/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/action_objects/ShowTrigger/ShowTrigger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Stage/Layer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/action_objects/Lever/Lever.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/action_objects/MoveBlock/MoveBlock.tscn" type="PackedScene" id=10]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+func _ready():
+	pause_mode = Node.PAUSE_MODE_PROCESS
+
+func _input(event):
+	if event.is_action_pressed(\"ui_cancel\"):
+		var new_pause_state = not get_tree().paused
+		get_tree().paused = new_pause_state
+		visible = new_pause_state
+"
+
+[node name="Stage" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Layer1" parent="." instance=ExtResource( 8 )]
+
+[node name="TileMap" parent="Layer1" index="0"]
+tile_data = PoolIntArray( -917498, 0, 1, -917497, 0, 196610, -917496, 0, 196610, -917495, 0, 196610, -917494, 0, 196610, -917493, 0, 196610, -917492, 0, 196610, -917491, 0, 196610, -917490, 0, 196610, -917489, 0, 3, -851962, 0, 65536, -851953, 0, 65536, -786426, 0, 65536, -786417, 0, 65536, -720890, 0, 131073, -720889, 0, 196610, -720888, 0, 196610, -720887, 0, 3, -720885, 0, 1, -720884, 0, 196610, -720883, 0, 196610, -720882, 0, 196610, -720881, 0, 131075, -655351, 0, 131072, -655349, 0, 131072, -524278, 0, 0, -458745, 1, 0, -458744, 1, 0, -458743, 1, 0, -458742, 0, 65536, -458741, 1, 0, -458740, 0, 0, -393209, 0, 196609, -393208, 0, 196610, -393207, 0, 196610, -393206, 0, 65538, -393205, 0, 196610, -393204, 0, 65539, -393203, 1, 0, -327677, 0, 1, -327676, 0, 196611, -327670, 0, 131072, -327668, 0, 131073, -327667, 0, 3, -262144, 0, 1, -262143, 0, 196610, -262142, 0, 196610, -262141, 0, 131075, -262131, 0, 131072, -131073, 0, 1, -196608, 0, 131075, -196589, 0, 1, -196588, 0, 196611, -65537, 0, 131072, -131058, 0, 1, -131057, 0, 196610, -131056, 0, 196610, -131055, 0, 196610, -131054, 0, 196610, -131053, 0, 131075, -65536, 0, 196609, -65535, 0, 196610, -65534, 0, 196610, -65533, 0, 196610, -65532, 0, 196610, -65531, 0, 196610, -65530, 0, 196610, -65529, 0, 3, -65525, 0, 1, -65524, 0, 196610, -65523, 0, 196610, -65522, 0, 131075, 7, 0, 65536, 11, 0, 65536, 65543, 0, 65536, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 0, 65536, 131079, 0, 131073, 131080, 0, 196610, 131081, 0, 196610, 131082, 0, 196610, 131083, 0, 131075 )
+
+[node name="Room1" parent="Layer1/RoomBorders" index="0" instance=ExtResource( 2 )]
+margin_left = -79.0
+margin_top = -176.0
+margin_right = 401.0
+margin_bottom = 64.0
+
+[node name="CameraTrigger" parent="Layer1/RoomBorders/Room1" index="0"]
+position = Vector2( 8, 40 )
+
+[node name="AreaShape" parent="Layer1/RoomBorders/Room1/CameraTrigger" index="0"]
+position = Vector2( 95, 128 )
+scale = Vector2( 1.03977, 1 )
+polygon = PoolVector2Array( -38.47, 8, 100.022, 8, 100.022, 40, 146.186, 40, 146.186, 8, 307.76, 8, 307.76, -160, 146.186, -160, 146.186, -152, 130.798, -152, 130.798, -160, -38.47, -160 )
+
+[node name="Room2" parent="Layer1/RoomBorders" index="1" instance=ExtResource( 2 )]
+margin_left = 32.0
+margin_top = -296.0
+margin_right = 312.0
+margin_bottom = -152.0
+
+[node name="AreaShape" parent="Layer1/RoomBorders/Room2/CameraTrigger" index="0"]
+position = Vector2( 104, 88 )
+polygon = PoolVector2Array( -24, 24, 104, 24, 104, -16, -24, -16 )
+
+[node name="DeadTrigger1" parent="Layer1" instance=ExtResource( 4 )]
+position = Vector2( -128, 88 )
+scale = Vector2( 576, 1 )
+
+[node name="Door1" parent="Layer1" instance=ExtResource( 3 )]
+position = Vector2( 216, -176 )
+layer_id = 2
+
+[node name="Lever1" parent="Layer1" instance=ExtResource( 9 )]
+position = Vector2( 64, -88 )
+green = true
+receivers_list = [ [ 1, "MoveBlock1" ], [ 1, "MoveBlock2" ] ]
+
+[node name="MoveBlock1" parent="Layer1" instance=ExtResource( 10 )]
+position = Vector2( 224, -32 )
+senders_list = [ [ 1, "Layer1" ] ]
+width = 4
+height = 4
+positions = [ Vector2( 224, -32 ), Vector2( 272, -32 ) ]
+move_pattern = [ 0, 1 ]
+speed = 15
+
+[node name="MoveBlock2" parent="Layer1" instance=ExtResource( 10 )]
+position = Vector2( 128, -64 )
+senders_list = [ [ 1, "Lever1" ] ]
+width = 4
+positions = [ Vector2( 128, -64 ), Vector2( 80, -64 ) ]
+move_pattern = [ 0, 1 ]
+speed = 200
+
+[node name="Platform1" parent="Layer1" instance=ExtResource( 6 )]
+position = Vector2( 80, -56 )
+width = 4
+
+[node name="Platform2" parent="Layer1" instance=ExtResource( 6 )]
+position = Vector2( 224, -64 )
+width = 4
+
+[node name="Platform3" parent="Layer1" instance=ExtResource( 6 )]
+position = Vector2( 128, -8 )
+sender = true
+receivers_list = [ [ 1, "ShowTrigger1" ] ]
+width = 6
+
+[node name="SpawnPoint1" parent="Layer1" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 32, -24 )
+
+[node name="CollisionPolygon2D" parent="Layer1/SpawnPoint1/Area2D" index="0"]
+position = Vector2( -437, 22.5 )
+scale = Vector2( 26.25, 10.625 )
+polygon = PoolVector2Array( 22.4381, -1.3647, 16.0381, -1.3647, 16.0381, -5.12941, 22.4381, -5.12941 )
+
+[node name="ShowTrigger1" parent="Layer1" instance=ExtResource( 7 )]
+position = Vector2( 144, 0 )
+tile_data = PoolIntArray( -2, 0, 196611, -65534, 0, 196609, 65534, 0, 131081, 2, 0, 131081, 131070, 0, 131081, 131071, 0, 131081, 65536, 0, 131081, 65537, 0, 131081, 65538, 0, 131081, 196606, 0, 131081, 196607, 0, 131081, 131072, 0, 131081, 131073, 0, 131081, 131074, 0, 131081 )
+senders_list = [ [ 1, "Platfotm3" ] ]
+
+[node name="Layer2" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="TileMap" parent="Layer2" index="0"]
+tile_data = PoolIntArray( -983040, 0, 1, -983039, 0, 196610, -983038, 0, 196610, -983037, 0, 196610, -983036, 0, 196610, -983035, 0, 3, -983031, 0, 196609, -983030, 0, 196610, -983029, 0, 196610, -983028, 0, 196610, -983027, 0, 196610, -983026, 0, 196610, -983025, 0, 196610, -983024, 0, 196610, -983023, 0, 3, -917504, 0, 65536, -917499, 0, 131073, -917498, 0, 196611, -917487, 0, 65536, -851968, 0, 65536, -851951, 0, 65536, -786432, 0, 65536, -786431, 1, 0, -786430, 1, 0, -786429, 1, 0, -786428, 1, 0, -786415, 0, 65536, -720896, 0, 131073, -720895, 0, 196610, -720894, 0, 196610, -720893, 0, 196610, -720892, 0, 196610, -720891, 0, 196610, -720890, 0, 196610, -720889, 0, 196611, -720887, 0, 196609, -720886, 0, 196610, -720885, 0, 196610, -720884, 0, 196610, -720883, 0, 196610, -720882, 0, 196610, -720881, 0, 196610, -720880, 0, 196610, -720879, 0, 131075 )
+
+[node name="Room" parent="Layer2/RoomBorders" index="0" instance=ExtResource( 2 )]
+margin_left = -64.0
+margin_top = -296.0
+margin_right = 320.0
+margin_bottom = -120.0
+
+[node name="AreaShape" parent="Layer2/RoomBorders/Room/CameraTrigger" index="0"]
+position = Vector2( 344, 120 )
+polygon = PoolVector2Array( -24, -8, -8, -8, -8, -64, -264, -64, -264, -8, -136, -8 )
+
+[node name="Door" parent="Layer2" instance=ExtResource( 3 )]
+position = Vector2( 216, -176 )
+layer_id = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pause" type="Control" parent="CanvasLayer"]
+visible = false
+script = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/pause"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[editable path="Layer1"]
+[editable path="Layer1/RoomBorders/Room1"]
+[editable path="Layer1/RoomBorders/Room2"]
+[editable path="Layer1/SpawnPoint1"]
+[editable path="Layer2"]
+[editable path="Layer2/RoomBorders/Room"]

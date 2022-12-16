@@ -1,30 +1,35 @@
 extends KinematicBody2D
 
-const ACCELERATION = 450
-const MAX_HORIZONTAL_SPEED = 70
-const FRICTION = 0.5
+const ACCELERATION: float = 450.0
+const MAX_HORIZONTAL_SPEED: float = 70.0
+const FRICTION: float = 0.55
 
-const GRAVITY = Vector2.DOWN
-const GRAVITY_POWER = 680
-const MAX_FALING_SPEED = 190
-const AIR_RESISTANCE = 0.1
+const GRAVITY: Vector2 = Vector2.DOWN
+const GRAVITY_POWER: float = 680.0
+const MAX_FALING_SPEED: float = 190.0
+const AIR_RESISTANCE: float = 0.1
 
-const JUMP_POWER = 100
-const MAX_TIME_IN_JUMP = 0.18
-const COUNT_OF_JUMPS = 2
-var time_in_jump = 0
-var count_of_jumps = COUNT_OF_JUMPS
+const JUMP_POWER: float = 100.0
+const MAX_TIME_IN_JUMP: float = 0.18
+const COUNT_OF_JUMPS: int = 2
+var time_in_jump: float = 0
+var count_of_jumps: int = COUNT_OF_JUMPS
 
-var velocity = Vector2.ZERO
+var velocity: Vector2 = Vector2.ZERO
+var motion_state: bool = true
+	
+func _ready():
+	$RigidArea.connect("body_entered", self, 'die')
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
-		for object in $Area2D.get_overlapping_areas():
+		for object in $InteractArea.get_overlapping_areas():
 			if object.has_method("interact"):
 				object.interact()
-
+	
 func _physics_process(delta):
-	var x_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	if can_not_move() : return
+	var x_direction: int = int(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 	velocity.x += x_direction * ACCELERATION * delta
 	
 	if is_on_floor():
@@ -54,6 +59,9 @@ func _physics_process(delta):
 	velocity.y = clamp(velocity.y, -JUMP_POWER, MAX_FALING_SPEED)
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-func die(_body):
+func can_not_move() -> bool:
+	return not motion_state
+	
+func die(_body) -> void:
 	Game.save()
 	get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
