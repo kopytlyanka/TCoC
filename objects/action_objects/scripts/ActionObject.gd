@@ -50,7 +50,7 @@ func is_sender() -> bool:
 func become_sender() -> void:
 	if not is_sender(): sender = true
 	for receiver_data in receivers_list:
-		var receicver = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
+		var receicver: Node = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
 		connect('condition_fulfilled', receicver, 'receive_signal')
 
 func send_signal() -> void:
@@ -86,13 +86,13 @@ func hidden_become_green() -> void:
 			receicver.hidden_become_green()
 	if not Game.has_been_built: _load()
 	
-func visually_become_green():
+func visually_become_green() -> void:
 	if is_green_visually():
 		add_child(particles.instance())
 	
 func _load() -> void:
 	check_type('green')
-	var data = Game.save_data['layer%d' % layer_id][name]
+	var data: Dictionary = Game.save_data['layer%d' % layer_id][name]
 	for property in save_list:
 		set(property, data[property])
 	

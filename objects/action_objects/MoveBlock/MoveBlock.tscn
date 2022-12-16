@@ -5,6 +5,7 @@
 [ext_resource path="res://objects/action_objects/MoveBlock/scripts/MoveBlock.gd" type="Script" id=3]
 
 [node name="MoveBlock" instance=ExtResource( 2 )]
+z_index = 1
 script = ExtResource( 3 )
 receiver = true
 width = 2

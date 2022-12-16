@@ -58,7 +58,7 @@ func get_layer(layer_id: int) -> Node:
 	return get_stage().get_node_or_null('Layer%d' % layer_id)
 	
 func get_parent_layer_of(node: Node) -> Node2D:
-	var parent = node.get_parent()
+	var parent: Node2D = node.get_parent()
 	if parent.name == 'Stage': return null
 	elif parent.name.substr(0, 5) == 'Layer':
 		return parent
