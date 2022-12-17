@@ -7,6 +7,5 @@ func activate() -> void:
 	$Tween.interpolate_property(
 		self, 'modulate:a',
 		modulate.a, 0,
-		time,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		time)
 	$Tween.start()
