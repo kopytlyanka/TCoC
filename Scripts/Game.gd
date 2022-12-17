@@ -3,19 +3,18 @@ extends Node
 #[SAVE/LOAD]
 var save_file = File.new()
 var save_file_name: String
-var save_data: Dictionary
-var spawn_point: Vector2
-var visible_layer_id: int
-var green_group_expansion: Dictionary
+var save_data: Dictionary = {}
+var spawn_point: Vector2 = Vector2(1, 1)
+var visible_layer_id: int = 1
+var green_group_expansion: Dictionary = {}
 
 func load():
 	if save_file.file_exists('user://save/save1.json'):
 		save_file_name = 'save1'
-	else:
-		save_file_name = 'base_save'
 	get_tree().change_scene('res://GamePlay.tscn')
 	
 func load_data():
+	if not save_file.file_exists('user://save/save1.json'): return
 	save_file.open('user://save/%s.json' % save_file_name, File.READ)
 	save_data = parse_json(save_file.get_as_text())
 	green_group_expansion = save_data['green_group_expansion']
@@ -24,7 +23,7 @@ func load_data():
 	save_file.close()
 
 func save():
-	if save_file_name == 'base_save':
+	if save_file_name == '':
 		save_file_name = 'save1'
 	save_file.open('user://save/%s.json' % save_file_name, File.WRITE)
 	for object in get_tree().get_nodes_in_group('green'):

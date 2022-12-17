@@ -92,6 +92,7 @@ func visually_become_green() -> void:
 	
 func _load() -> void:
 	check_type('green')
+	if Game.save_data.empty(): return
 	var data: Dictionary = Game.save_data['layer%d' % layer_id][name]
 	for property in save_list:
 		set(property, data[property])
