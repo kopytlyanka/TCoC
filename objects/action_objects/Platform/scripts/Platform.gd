@@ -20,7 +20,6 @@ func _ready():
 		connect('destruction_started', tile, 'start_destroy', [time])
 		add_child(tile)
 		
-	
 func check_body(body: Node) -> void:
 	if body.name != 'Player' or in_process_of_destruction: return
 	in_process_of_destruction = true
