@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fake_blocks.png-7e89df27a3765510cf08b0bcabbd5695.stex"
+path="res://.import/fake_blocks.png-2f76e9dea677d10de3abac74ed5eefa5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/action_objects/ShowTrigger/assets/fake_blocks.png"
-dest_files=[ "res://.import/fake_blocks.png-7e89df27a3765510cf08b0bcabbd5695.stex" ]
+source_file="res://objects/action_objects/HiddenArea/assets/fake_blocks.png"
+dest_files=[ "res://.import/fake_blocks.png-2f76e9dea677d10de3abac74ed5eefa5.stex" ]
 
 [params]
 

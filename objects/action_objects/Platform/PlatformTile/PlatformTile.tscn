@@ -9,7 +9,6 @@ extents = Vector2( 4, 2 )
 
 [node name="PlatformTile" type="StaticBody2D"]
 position = Vector2( 4, -4 )
-z_index = -2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

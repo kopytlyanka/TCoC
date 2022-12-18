@@ -9,13 +9,13 @@ var visible_layer_id: int = 1
 var green_group_expansion: Dictionary = {}
 
 func load():
-	if save_file.file_exists('user://save/save1.json'):
+	if save_file.file_exists('user://save1.json'):
 		save_file_name = 'save1'
 	get_tree().change_scene('res://GamePlay.tscn')
 	
 func load_data():
-	if not save_file.file_exists('user://save/save1.json'): return
-	save_file.open('user://save/%s.json' % save_file_name, File.READ)
+	if not save_file.file_exists('user://save1.json'): return
+	save_file.open('user://%s.json' % save_file_name, File.READ)
 	save_data = parse_json(save_file.get_as_text())
 	green_group_expansion = save_data['green_group_expansion']
 	spawn_point = str2var(save_data['spawn_point'])
@@ -25,7 +25,7 @@ func load_data():
 func save():
 	if save_file_name == '':
 		save_file_name = 'save1'
-	save_file.open('user://save/%s.json' % save_file_name, File.WRITE)
+	save_file.open('user://%s.json' % save_file_name, File.WRITE)
 	for object in get_tree().get_nodes_in_group('green'):
 		var object_data: Array = object._save()
 		var object_layer: String = object_data[0]
