@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/inaction_objects/DeadTrigger/DeadTrigger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/inaction_objects/SpawnPoint/SpawnPoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/action_objects/Platform/Platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://objects/action_objects/ShowTrigger/ShowTrigger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/action_objects/HiddenArea/HiddenArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Stage/Layer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/action_objects/Lever/Lever.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/action_objects/MoveBlock/MoveBlock.tscn" type="PackedScene" id=10]
@@ -68,6 +68,11 @@ scale = Vector2( 576, 1 )
 position = Vector2( 216, -176 )
 layer_id = 2
 
+[node name="HiddenArea1" parent="Layer1" instance=ExtResource( 7 )]
+position = Vector2( 144, 0 )
+tile_data = PoolIntArray( -2, 0, 196611, -65534, 0, 196609, 65534, 0, 131081, 2, 0, 131081, 131070, 0, 131081, 131071, 0, 131081, 65536, 0, 131081, 65537, 0, 131081, 65538, 0, 131081, 196606, 0, 131081, 196607, 0, 131081, 131072, 0, 131081, 131073, 0, 131081, 131074, 0, 131081 )
+senders_list = [ [ 1, "Platfotm3" ] ]
+
 [node name="Lever1" parent="Layer1" instance=ExtResource( 9 )]
 position = Vector2( 64, -88 )
 green = true
@@ -101,7 +106,7 @@ width = 4
 [node name="Platform3" parent="Layer1" instance=ExtResource( 6 )]
 position = Vector2( 128, -8 )
 sender = true
-receivers_list = [ [ 1, "ShowTrigger1" ] ]
+receivers_list = [ [ 1, "HiddenArea1" ] ]
 width = 6
 
 [node name="SpawnPoint1" parent="Layer1" instance=ExtResource( 5 )]
@@ -112,11 +117,6 @@ position = Vector2( 32, -24 )
 position = Vector2( -437, 22.5 )
 scale = Vector2( 26.25, 10.625 )
 polygon = PoolVector2Array( 22.4381, -1.3647, 16.0381, -1.3647, 16.0381, -5.12941, 22.4381, -5.12941 )
-
-[node name="ShowTrigger1" parent="Layer1" instance=ExtResource( 7 )]
-position = Vector2( 144, 0 )
-tile_data = PoolIntArray( -2, 0, 196611, -65534, 0, 196609, 65534, 0, 131081, 2, 0, 131081, 131070, 0, 131081, 131071, 0, 131081, 65536, 0, 131081, 65537, 0, 131081, 65538, 0, 131081, 196606, 0, 131081, 196607, 0, 131081, 131072, 0, 131081, 131073, 0, 131081, 131074, 0, 131081 )
-senders_list = [ [ 1, "Platfotm3" ] ]
 
 [node name="Layer2" parent="." instance=ExtResource( 8 )]
 visible = false

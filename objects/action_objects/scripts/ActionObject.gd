@@ -1,5 +1,4 @@
 extends Node2D
-class_name ActionObject
 
 export var receiver: bool = false
 export var sender: bool = false
@@ -92,7 +91,10 @@ func visually_become_green() -> void:
 	
 func _load() -> void:
 	check_type('green')
+	var layer_name: String = 'layer%d' % layer_id
 	if Game.save_data.empty(): return
+	if not layer_name in Game.save_data.keys(): return
+	if not name in Game.save_data[layer_name].keys(): return
 	var data: Dictionary = Game.save_data['layer%d' % layer_id][name]
 	for property in save_list:
 		set(property, data[property])
