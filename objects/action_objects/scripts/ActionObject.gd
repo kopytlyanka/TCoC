@@ -1,14 +1,23 @@
+tool
 extends Node2D
+var ObjectInfo = preload('ObjectInfo.gd')
 
-export var receiver: bool = false
-export var sender: bool = false
-export var green: bool = false
-var green_visible: bool = false
+export(bool) var receiver = false setget , is_receiver
+export(bool) var sender = false setget , is_sender
+export(bool) var green = false setget , is_green
+var green_visible: bool = false setget , is_green_visually
 var layer_id: int
 
-export var senders_list: Array
-export var receivers_list: Array
+export(Array, Resource) var receivers_list setget set_receivers_list
 
+func set_receivers_list(value):
+	receivers_list = value
+	for i in receivers_list.size():
+		if not receivers_list[i]:
+			receivers_list[i] = ObjectInfo.new()
+			receivers_list[i].resource_name = 'Object Info'	
+			
+#[GENERAL]
 func _enter_tree():
 	if not Engine.is_editor_hint():
 		layer_id = Game.get_parent_layer_of(self).layer_id
@@ -24,6 +33,7 @@ func _ready():
 
 func check_type(type: String) -> void:
 	assert(self.get(type), "%s is not %s!\n(path: %s)" % [self, type, self.get_path()])
+#[GENERAL]
 
 #[RESIVER]
 func is_receiver() -> bool:
@@ -49,7 +59,9 @@ func is_sender() -> bool:
 func become_sender() -> void:
 	if not is_sender(): sender = true
 	for receiver_data in receivers_list:
-		var receicver: Node = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
+		var receiver_layer_id: int = receiver_data.layer_id
+		var receiver_name: String = receiver_data.name
+		var receicver: Node = Game.get_layer(receiver_layer_id).get_node(receiver_name)
 		connect('condition_fulfilled', receicver, 'receive_signal')
 
 func send_signal() -> void:
@@ -81,7 +93,7 @@ func hidden_become_green() -> void:
 				Game.green_group_expansion[layer_id] = []
 			Game.green_group_expansion[layer_id].append(name)
 		for receiver_data in receivers_list:
-			var receicver = Game.get_layer(receiver_data[0]).get_node(receiver_data[1])
+			var receicver: Node = Game.get_layer(receiver_data.layer_id).get_node(receiver_data.name)
 			receicver.hidden_become_green()
 	if not Game.has_been_built: _load()
 	

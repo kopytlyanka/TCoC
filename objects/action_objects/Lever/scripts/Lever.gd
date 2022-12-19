@@ -3,7 +3,7 @@ extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 var lever_on: Resource = preload('res://objects/action_objects/Lever/assets/lever_on.png')
 var lever_off: Resource = preload('res://objects/action_objects/Lever/assets/lever_off.png')
-export var active: bool = false
+export(bool) var active = false
 
 func _enter_tree():
 	self.save_list = ['active']

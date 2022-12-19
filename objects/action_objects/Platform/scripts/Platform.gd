@@ -2,8 +2,8 @@ tool
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 var platform_tile: Resource = preload('res://objects/action_objects/Platform/PlatformTile/PlatformTile.tscn')
-export var width: int = 1
-export var time: float = 1
+export(int, 1, 100) var width = 1
+export(float, 0, 10) var time = 1.0
 
 var in_process_of_destruction: bool = false
 signal destruction_started
