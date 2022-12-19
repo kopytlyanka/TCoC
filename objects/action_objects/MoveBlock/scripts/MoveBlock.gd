@@ -1,11 +1,11 @@
 tool
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
-export var width: int = 2
-export var height: int = 2
-export var positions: Array
-export var move_pattern: Array
-export var speed: int
+export(int, 2, 100) var width = 2
+export(int, 2, 100) var height = 2
+export(PoolVector2Array) var positions
+export(PoolIntArray) var move_pattern
+export(float, 10, 400) var speed = 100.0
 
 var iterator: int = 0
 

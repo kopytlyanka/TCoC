@@ -1,7 +1,7 @@
 tool
 extends "res://objects/action_objects/scripts/ActionObject.gd"
-		
-export var time: float = 0.25
+
+export(float, 0, 5) var time = 0.25
 var hides: bool = true
 	
 func _enter_tree():

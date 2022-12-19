@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Stage/scripts/stageCreating.gd" type="Script" id=1]
 [ext_resource path="res://Stage/BorderRoom.tscn" type="PackedScene" id=2]
@@ -10,6 +10,25 @@
 [ext_resource path="res://Stage/Layer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/action_objects/Lever/Lever.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/action_objects/MoveBlock/MoveBlock.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/action_objects/scripts/ObjectInfo.gd" type="Script" id=11]
+
+[sub_resource type="Resource" id=2]
+resource_name = "Object Info"
+script = ExtResource( 11 )
+layer_id = 1
+name = "MoveBlock1"
+
+[sub_resource type="Resource" id=3]
+resource_name = "Object Info"
+script = ExtResource( 11 )
+layer_id = 1
+name = "MoveBlock2"
+
+[sub_resource type="Resource" id=4]
+resource_name = "Object Info"
+script = ExtResource( 11 )
+layer_id = 1
+name = "HiddenArea1"
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -71,16 +90,14 @@ layer_id = 2
 [node name="HiddenArea1" parent="Layer1" instance=ExtResource( 7 )]
 position = Vector2( 144, 0 )
 tile_data = PoolIntArray( -2, 0, 196611, -65534, 0, 196609, 65534, 0, 131081, 2, 0, 131081, 131070, 0, 131081, 131071, 0, 131081, 65536, 0, 131081, 65537, 0, 131081, 65538, 0, 131081, 196606, 0, 131081, 196607, 0, 131081, 131072, 0, 131081, 131073, 0, 131081, 131074, 0, 131081 )
-senders_list = [ [ 1, "Platfotm3" ] ]
 
 [node name="Lever1" parent="Layer1" instance=ExtResource( 9 )]
 position = Vector2( 64, -88 )
 green = true
-receivers_list = [ [ 1, "MoveBlock1" ], [ 1, "MoveBlock2" ] ]
+receivers_list = [ SubResource( 2 ), SubResource( 3 ) ]
 
 [node name="MoveBlock1" parent="Layer1" instance=ExtResource( 10 )]
 position = Vector2( 224, -32 )
-senders_list = [ [ 1, "Layer1" ] ]
 width = 4
 height = 4
 positions = [ Vector2( 224, -32 ), Vector2( 272, -32 ) ]
@@ -89,7 +106,6 @@ speed = 15
 
 [node name="MoveBlock2" parent="Layer1" instance=ExtResource( 10 )]
 position = Vector2( 128, -64 )
-senders_list = [ [ 1, "Lever1" ] ]
 width = 4
 positions = [ Vector2( 128, -64 ), Vector2( 80, -64 ) ]
 move_pattern = [ 0, 1 ]
@@ -106,7 +122,7 @@ width = 4
 [node name="Platform3" parent="Layer1" instance=ExtResource( 6 )]
 position = Vector2( 128, -8 )
 sender = true
-receivers_list = [ [ 1, "HiddenArea1" ] ]
+receivers_list = [ SubResource( 4 ) ]
 width = 6
 
 [node name="SpawnPoint1" parent="Layer1" instance=ExtResource( 5 )]
