@@ -26,6 +26,26 @@ func _process(_delta):
 		for object in $InteractArea.get_overlapping_areas():
 			if object.has_method("interact"):
 				object.interact()
+				
+	if not is_on_floor():
+		if velocity.y < 0:
+			if velocity.x > 0:
+				$AnimatedSprite.play("jump_st")
+			else:
+				$AnimatedSprite.play("jump_st_l")
+						
+		elif velocity.y > 0:
+			if velocity.x > 0:
+				$AnimatedSprite.play("jump_d")
+			else:
+				$AnimatedSprite.play("jump_d_l")
+	else:
+		if Input.get_action_strength("ui_right"):
+			$AnimatedSprite.play("run")	
+		elif Input.get_action_strength("ui_left"):
+			$AnimatedSprite.play("run_l")
+		else:
+			$AnimatedSprite.play("stop")
 	
 func _physics_process(delta):
 	if can_not_move() : return
