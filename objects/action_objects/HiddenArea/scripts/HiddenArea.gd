@@ -1,4 +1,5 @@
 tool
+
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 export(float, 0, 5) var time = 0.25

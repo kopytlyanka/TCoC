@@ -18,9 +18,6 @@ var count_of_jumps: int = COUNT_OF_JUMPS
 var velocity: Vector2 = Vector2.ZERO
 var motion_state: bool = true
 	
-func _ready():
-	$RigidArea.connect("body_entered", self, 'die')
-	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		for object in $InteractArea.get_overlapping_areas():
@@ -62,6 +59,6 @@ func _physics_process(delta):
 func can_not_move() -> bool:
 	return not motion_state
 	
-func die(_body) -> void:
+func die() -> void:
 	Game.save()
 	get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")

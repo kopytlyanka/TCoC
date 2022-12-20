@@ -1,6 +1,8 @@
 tool
+
 extends Node2D
-var ObjectInfo = preload('ObjectInfo.gd')
+
+var ObjectInfo: Resource = preload('ObjectInfo.gd')
 
 export(bool) var receiver = false setget , is_receiver
 export(bool) var sender = false setget , is_sender
@@ -70,7 +72,7 @@ func send_signal() -> void:
 #[SENDER]
 
 #[GREEN]
-var particles = preload("res://objects/action_objects/assets/GreenParticles.tscn")
+var particles: Resource = preload("../assets/GreenParticles.tscn")
 var save_list: Array
 
 func is_green() -> bool:

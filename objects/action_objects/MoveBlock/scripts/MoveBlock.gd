@@ -1,4 +1,5 @@
 tool
+
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 export(int, 2, 100) var width = 2

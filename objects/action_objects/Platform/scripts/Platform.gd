@@ -1,4 +1,5 @@
 tool
+
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 var platform_tile: Resource = preload('res://objects/action_objects/Platform/PlatformTile/PlatformTile.tscn')

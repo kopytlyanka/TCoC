@@ -1,4 +1,5 @@
 tool
+
 extends "res://objects/action_objects/scripts/ActionObject.gd"
 
 var lever_on: Resource = preload('res://objects/action_objects/Lever/assets/lever_on.png')
