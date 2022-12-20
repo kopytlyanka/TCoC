@@ -6,7 +6,8 @@
 [node name="MoveBlock" type="Node2D"]
 z_index = 1
 script = ExtResource( 3 )
-receiver = true
+types = 1
+"Receiver/Activate Mode" = 0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

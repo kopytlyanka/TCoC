@@ -1,8 +1,8 @@
 tool
 
-extends "res://objects/action_objects/scripts/ActionObject.gd"
+extends '../../scripts/ActionObject.gd'
 
-var ScullBullet: Resource = preload("../ScullBullet/ScullBullet.tscn")
+var ScullBullet: Resource = preload('../ScullBullet/ScullBullet.tscn')
 
 const START_POSITION = Vector2(3, -4)
 
@@ -19,7 +19,7 @@ func _enter_tree():
 		clip.append(bullet)
 		
 func _input(event):
-	if event.is_action_pressed("ui_focus_next"):
+	if event.is_action_pressed('ui_focus_next'):
 		if clip.empty(): return
 		var bullet: Node2D = clip[0]
 		clip.pop_front()

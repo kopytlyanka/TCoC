@@ -1,25 +1,38 @@
 tool
 
-extends "res://objects/action_objects/scripts/ActionObject.gd"
+extends '../../scripts/ActionObject.gd'
 
-export(int, 2, 100) var width = 2
-export(int, 2, 100) var height = 2
+export(int, 2, 10) var width = 2 setget set_width
+export(int, 2, 10) var height = 2 setget set_height
 export(PoolVector2Array) var positions
 export(PoolIntArray) var move_pattern
 export(float, 10, 400) var speed = 100.0
 
 var iterator: int = 0
 
+func set_width(value: int):
+	update_tile_map_with(-1)
+	width = value
+	update_tile_map_with(0)
+
+func set_height(value: int):
+	update_tile_map_with(-1)
+	height = value
+	update_tile_map_with(0)
+
 func _enter_tree():
 	self.save_list = ['iterator']
 
 func _ready():
-	global_position = positions[move_pattern[iterator]]
-	var tileMap: TileMap = get_node("TileMap")
+	if not (move_pattern.empty() or positions.empty()):
+		global_position = positions[move_pattern[iterator]]
+
+func update_tile_map_with(id: int):
+	var tile_map: TileMap = get_node("TileMap")
 	for x in range(width):
 		for y in range(-height, 0):
-			tileMap.set_cell(x, y, 0)
-	tileMap.update_bitmask_region(Vector2(0, 0), Vector2(width - 1, -height))
+			tile_map.set_cell(x, y, id)
+	tile_map.update_bitmask_region(Vector2(0, 0), Vector2(width - 1, -height))
 
 func activate() -> void:
 	iterator += 1
