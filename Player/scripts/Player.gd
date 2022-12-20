@@ -17,11 +17,21 @@ var count_of_jumps: int = COUNT_OF_JUMPS
 
 var velocity: Vector2 = Vector2.ZERO
 var motion_state: bool = true
-	
+var die: bool = false
+
 func _ready():
 	$RigidArea.connect("body_entered", self, 'die')
+	$AnimatedSprite.connect("animation_finished", self, 'e_die')
+	
+func e_die():
+	if die:
+		Game.save()
+		get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
 	
 func _process(_delta):
+	if die:
+		$AnimatedSprite.play("die")
+		return
 	if Input.is_action_just_pressed("ui_down"):
 		for object in $InteractArea.get_overlapping_areas():
 			if object.has_method("interact"):
@@ -40,12 +50,13 @@ func _process(_delta):
 			else:
 				$AnimatedSprite.play("jump_d_l")
 	else:
-		if Input.get_action_strength("ui_right"):
-			$AnimatedSprite.play("run")	
-		elif Input.get_action_strength("ui_left"):
-			$AnimatedSprite.play("run_l")
-		else:
-			$AnimatedSprite.play("stop")
+		
+			if Input.get_action_strength("ui_right"):
+				$AnimatedSprite.play("run")	
+			elif Input.get_action_strength("ui_left"):
+				$AnimatedSprite.play("run_l")
+			else:
+				$AnimatedSprite.play("stop")
 	
 func _physics_process(delta):
 	if can_not_move() : return
@@ -83,5 +94,6 @@ func can_not_move() -> bool:
 	return not motion_state
 	
 func die(_body) -> void:
-	Game.save()
-	get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+	$AnimatedSprite.stop()
+	die = true
+	
