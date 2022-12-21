@@ -35,4 +35,3 @@ func check_body(body: Node) -> void:
 	
 func end_destroy() -> void:
 	if is_sender(): send_signal()
-	

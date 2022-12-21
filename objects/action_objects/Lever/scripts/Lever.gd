@@ -2,8 +2,8 @@ tool
 
 extends '../../scripts/ActionObject.gd'
 
-var lever_on: Resource = preload('res://objects/action_objects/Lever/assets/lever_on.png')
-var lever_off: Resource = preload('res://objects/action_objects/Lever/assets/lever_off.png')
+var LeverOn: Resource = preload('../assets/LeverOn.png')
+var LeverOff: Resource = preload('../assets/LeverOff.png')
 export(bool) var active = false setget update_texture
 
 func _enter_tree():
@@ -15,5 +15,5 @@ func interact() -> void:
 
 func update_texture(new_active: bool) -> void:
 	active = new_active
-	if active: $Sprite.texture = lever_on
-	else: $Sprite.texture = lever_off
+	if active: $Sprite.texture = LeverOn
+	else: $Sprite.texture = LeverOff

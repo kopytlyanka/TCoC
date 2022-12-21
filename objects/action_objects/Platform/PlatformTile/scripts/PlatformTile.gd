@@ -15,13 +15,13 @@ func _ready():
 	rand_seed(int(Time.get_unix_time_from_system()))
 	tween.connect('tween_completed', self, 'recive_signal')
 	connect('tile_destroyed', get_parent(), 'end_destroy')
-	
+
 func recive_signal(_object: Node2D, key: String) -> void:
 	if key == ':position':
 		shake()
 	if key == ':position:y':
 		particles.emitting = false
-	
+
 func start_destroy(time: float) -> void:
 	shakes_count = int(SHAKES_PER_SECOND * time)
 	shake_time = time / shakes_count
@@ -38,7 +38,7 @@ func shake() -> void:
 		tween.start()
 	else:
 		fade_out()
-		
+
 func fade_out():
 	collision_layer = 0
 	tween.interpolate_property(

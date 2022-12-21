@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lever_off.png-0939601d14f67716459aa6ce26098e80.stex"
+path="res://.import/Perpendicular.png-3889f6938d3cee0a32fd71491204cfee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/action_objects/Lever/assets/lever_off.png"
-dest_files=[ "res://.import/lever_off.png-0939601d14f67716459aa6ce26098e80.stex" ]
+source_file="res://objects/action_objects/SkullTrap/assets/Perpendicular.png"
+dest_files=[ "res://.import/Perpendicular.png-3889f6938d3cee0a32fd71491204cfee.stex" ]
 
 [params]
 

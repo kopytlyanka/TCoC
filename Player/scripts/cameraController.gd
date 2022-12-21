@@ -15,4 +15,3 @@ func change_limits(new_limits: Dictionary) -> void:
 			Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	$Tween.start()
 	duration = BASIC_DURATION
-

@@ -19,5 +19,3 @@ func check_body(body):
 	if body.has_method('die'):
 		body.die()
 	emit_signal('already_hit', self)
-	
-	

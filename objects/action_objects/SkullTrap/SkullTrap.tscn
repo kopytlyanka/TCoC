@@ -1,21 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://objects/action_objects/SkullTrap/assets/SkullTrap.png" type="Texture" id=1]
+[ext_resource path="res://objects/action_objects/SkullTrap/assets/Parallel.png" type="Texture" id=1]
 [ext_resource path="res://objects/action_objects/SkullTrap/scripts/SkullTrap.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 4 )
+extents = Vector2( 1, 1 )
 
 [node name="SkullTrap" type="StaticBody2D"]
 script = ExtResource( 2 )
 types = 1
-bullet_speed = 30.0
+"Receiver/Shot Delay" = 1.0
 "Receiver/Activate Mode" = 1
+"Receiver/Initially Active" = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 5, -4 )
+position = Vector2( 4, -4 )
+scale = Vector2( 3, 4 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 5, -4 )
+position = Vector2( 4, -4 )
 texture = ExtResource( 1 )

@@ -11,25 +11,32 @@ const SENDER: int = 1 << 1
 const GREEN: int = 1 << 2
  
 func _set_type(new_types: int) -> void:
-	var was_green = is_green()
+	var was_green = is_green() 
+	var was_receiver = is_receiver()
 	types = new_types
 	if not Engine.is_editor_hint(): return
 	if was_green != is_green():
 		if was_green: visually_lose_green()
 		else: visually_become_green()
+	if was_receiver != is_receiver():
+		activate_mode = MODE.Single
 	property_list_changed_notify()
 	
 func _set(property: String, value) -> bool:
 	var set_result = true
 	match property:
+		'Receiver/Activate Mode':
+			activate_mode = value
+			if Engine.is_editor_hint():
+				cycle_active_now = false
+		'Receiver/Initially Active':
+			cycle_active_now = value
 		'Sender/Receivers List':
 			receivers_list = value
 			for i in receivers_list.size():
 				if not receivers_list[i]:
 					receivers_list[i] = ObjectInfo.new()
 					receivers_list[i].resource_name = 'Object Info'	
-		'Receiver/Activate Mode':
-			activate_mode = value
 		'Green/Green Visible':
 			if value:
 				visually_become_green()
@@ -37,14 +44,17 @@ func _set(property: String, value) -> bool:
 				visually_lose_green()
 		_:
 			set_result = false
+	property_list_changed_notify()
 	return set_result
 
 func _get(property: String):
 	match property:
-		'Sender/Receivers List':
-			return receivers_list
 		'Receiver/Activate Mode':
 			return activate_mode
+		'Receiver/Initially Active':
+			return cycle_active_now
+		'Sender/Receivers List':
+			return receivers_list
 		'Green/Green Visible':
 			return green_visible
 
@@ -57,15 +67,20 @@ func _get_property_list() -> Array:
 			'hint': PROPERTY_HINT_ENUM,
 			'hint_string': str(MODE).substr(1)
 		})
+		if activate_mode == MODE.Cycle:
+			property_list.append({
+				'name': 'Receiver/Initially Active',
+				'type': TYPE_BOOL, 
+			})
 	if is_sender():
 		property_list.append({
 			'name': 'Sender/Receivers List',
-			"type": TYPE_ARRAY, 
+			'type': TYPE_ARRAY, 
 		})
 	if is_green():
 		property_list.append({
 			'name': 'Green/Green Visible',
-			"type": TYPE_BOOL, 
+			'type': TYPE_BOOL, 
 		})
 	return property_list
 			
@@ -90,6 +105,7 @@ func check_type(type: String) -> void:
 #[RESIVER]
 enum MODE {Single, Cycle}
 var activate_mode: int
+var cycle_active_now: bool = false
 
 func is_receiver() -> bool:
 	return bool(types & RECEIVER)
@@ -103,16 +119,27 @@ func become_receiver() -> void:
 	
 func receive_signal(_sender: String) -> void:
 	check_type('receiver')
-	if activate_mode == MODE.Single:
+	if is_single_mode():
 		activate()
-	if activate_mode == MODE.Cycle:
+	if is_cycle_mode():
+		cycle_active_now = not cycle_active_now
 		cyclically_activate()
+
+func is_single_mode() -> bool:
+	return activate_mode == MODE.Single
+
+func is_cycle_mode() -> bool:
+	return activate_mode == MODE.Cycle
+
+func is_active_now() -> bool:
+	return is_cycle_mode() and cycle_active_now
 	
 func activate() -> void:
 	pass
-	
+
 func cyclically_activate() -> void:
 	pass
+	
 #[RESIVER]
 
 #[SENDER]
@@ -194,7 +221,8 @@ func _load() -> void:
 	if not name in Game.save_data[layer_name].keys(): return
 	var data: Dictionary = Game.save_data['layer%d' % layer_id][name]
 	for property in save_list:
-		set(property, data[property])
+		if property in data.keys():
+			set(property, data[property])
 	
 func _save() -> Array:
 	check_type('green')
