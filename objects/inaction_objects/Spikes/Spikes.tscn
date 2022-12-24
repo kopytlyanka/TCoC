@@ -4,12 +4,14 @@
 [ext_resource path="res://objects/inaction_objects/DeadTrigger/DeadTrigger.tscn" type="PackedScene" id=2]
 
 [node name="Spikes" type="Node2D"]
-z_index = -1
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 
-[node name="deadTrigger" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0.5, 16 )
-scale = Vector2( 15, 8 )
+[node name="DeadTrigger1" parent="." instance=ExtResource( 2 )]
+position = Vector2( -8, 8 )
+scale = Vector2( 16, 4 )
+
+[node name="DeadTrigger2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -6, 4 )
+scale = Vector2( 12, 5 )

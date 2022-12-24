@@ -71,8 +71,8 @@ func pow2(power: int) -> int:
 func change_property(property: String, node: Node, value) -> void:
 	if node.get(property) != null:
 		node.set(property, value)
-	for i in node.get_child_count():
-		change_property(property, node.get_child(i), value)
+	for child in node.get_children():
+		change_property(property, child, value)
 #[USEFUL]
 
 #[DISPLAY]
@@ -102,10 +102,10 @@ func activate_UI() -> void:
 	pass
 
 func add_player() -> void:
-	Game.get_self().add_child(preload("res://Player/Player.tscn").instance())
+	Game.get_self().add_child(preload('res://Player/Player.tscn').instance())
 
 func add_stage() -> void:
-	get_self().add_child(preload("res://Stage/Stage.tscn").instance())
+	get_self().add_child(preload('res://Stage/Stage.tscn').instance())
 
 func spawn_player() -> void:
 	get_layer(visible_layer_id).get_node('SpawnPoint%d' % spawn_point.y).spawn_player()
