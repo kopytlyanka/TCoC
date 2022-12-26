@@ -61,9 +61,12 @@ func _set_derection(new_direction: int) -> bool:
 
 func _enter_tree():
 	for _i in range(clip_size):
-		var bullet: Node2D = ScullBullet.instance()
+		var bullet: Area2D = ScullBullet.instance()
 		bullet.position = START_POSITION
 		bullet.speed = bullet_speed
+		bullet.collision_layer = layer_id
+		bullet.collision_mask = layer_id
+		
 		clip.append(bullet)
 	if is_cycle_mode():
 		timer = Timer.new()
