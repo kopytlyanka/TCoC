@@ -35,15 +35,17 @@ alignment = 1
 
 [node name="NewGame" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_top = 18.0
+margin_right = 137.0
 margin_bottom = 38.0
 
 [node name="Continue" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_top = 42.0
+margin_right = 137.0
 margin_bottom = 62.0
 
 [node name="Options" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
 margin_top = 66.0
-margin_right = 40.0
+margin_right = 137.0
 margin_bottom = 86.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
@@ -73,5 +75,4 @@ text = "The Curse of Causality"
 [node name="fade_in" parent="." instance=ExtResource( 8 )]
 visible = false
 
-[connection signal="pressed" from="Menu/CenterRow/Buttons/Continue" to="Menu/CenterRow/Buttons/Continue" method="_on_Continue_pressed"]
 [connection signal="fade_finished" from="fade_in" to="." method="_on_fade_in_fade_finished"]

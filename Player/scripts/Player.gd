@@ -26,7 +26,7 @@ func _ready():
 func e_die():
 	if not alive:
 		Game.save()
-		get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+		Game.load()
 	
 func _process(_delta):
 	if not alive:
