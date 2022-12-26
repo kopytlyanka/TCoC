@@ -35,28 +35,29 @@ alignment = 1
 
 [node name="NewGame" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_top = 18.0
-margin_right = 137.0
 margin_bottom = 38.0
 
 [node name="Continue" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_top = 42.0
-margin_right = 137.0
 margin_bottom = 62.0
 
 [node name="Options" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
 margin_top = 66.0
-margin_right = 137.0
+margin_right = 40.0
 margin_bottom = 86.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
 margin_left = 141.0
 margin_right = 160.0
 margin_bottom = 105.0
+size_flags_vertical = 3
 
 [node name="CharacterPng" type="TextureRect" parent="Menu/CenterRow/CenterContainer"]
 margin_top = 40.0
 margin_right = 19.0
 margin_bottom = 65.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
