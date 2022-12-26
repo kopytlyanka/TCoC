@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "ObjectInfo",
 "language": "GDScript",
 "path": "res://objects/action_objects/scripts/ObjectInfo.gd"
+}, {
+"base": "Area2D",
+"class": "bullet",
+"language": "GDScript",
+"path": "res://objects/action_objects/SkullTrap/ScullBullet/scripts/ScullBullet.gd"
 } ]
 _global_script_class_icons={
-"ObjectInfo": ""
+"ObjectInfo": "",
+"bullet": ""
 }
 
 [application]

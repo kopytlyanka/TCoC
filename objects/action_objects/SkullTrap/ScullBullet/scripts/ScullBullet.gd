@@ -6,6 +6,7 @@ onready var ScullTrap = get_parent()
 var speed: float
 
 signal already_hit(bullet)
+class_name bullet
 
 func _ready():
 	connect('body_entered', self, 'check_body')

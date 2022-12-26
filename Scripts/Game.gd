@@ -4,8 +4,8 @@ extends Node
 var save_file = File.new()
 var save_file_name: String
 var save_data: Dictionary = {}
-var spawn_point: Vector2 = Vector2(1, 1)
-var visible_layer_id: int = 1
+var spawn_point: Vector2 = Vector2(3, 1)
+var visible_layer_id: int = 3
 var green_group_expansion: Dictionary = {}
 
 func load():

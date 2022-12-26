@@ -220,6 +220,7 @@ func _load() -> void:
 	if not layer_name in Game.save_data.keys(): return
 	if not name in Game.save_data[layer_name].keys(): return
 	var data: Dictionary = Game.save_data['layer%d' % layer_id][name]
+	prints(layer_id, name, data)
 	for property in save_list:
 		if property in data.keys():
 			set(property, data[property])
